@@ -1,9 +1,9 @@
-const question = document.getElementById("question");
-const choices = Array.from(document.getElementsByClassName("choice-text"));
-const progressText = document.getElementById("progressText");
-const scoreText = document.getElementById("score");
-const progressBarFull = document.getElementById("progressBarFull");
-const timerElement = document.getElementById("timerCount");
+let question = document.getElementById("question");
+let choices = Array.from(document.getElementsByClassName("choice-text"));
+let progressText = document.getElementById("progressText");
+let scoreText = document.getElementById("score");
+let progressBarFull = document.getElementById("progressBarFull");
+let timerElement = document.getElementById("timerCount");
 let currentQuestion = {};
 let acceptingAnswers = false;
 let score = 0;
@@ -58,8 +58,7 @@ let questions = [
     }
 ];
 
-//CONSTANTS
-const CORRECT_BONUS = 10;
+let CORRECT_BONUS = 15;
 const MAX_QUESTIONS = 5;
 
 startGame = () => {
@@ -75,7 +74,7 @@ timer = () => {
     if (timerCount === 0) {
         clearInterval(timerInterval);
         localStorage.setItem("mostRecentScore", score);
-        // takes you to the end of page
+      
         return window.location.assign("complete.html");
     } else {
         timerElement.textContent = timerCount;
@@ -86,20 +85,20 @@ getNewQuestion = () => {
     if (availableQuesions.length === 0 || questionCounter >= MAX_QUESTIONS) {
         clearInterval(timerInterval);
         localStorage.setItem("mostRecentScore", score);
-        //takes you to the end of page
+       
         return window.location.assign("complete.html");
     }
     questionCounter++;
     progressText.innerText = `Question ${questionCounter}/${MAX_QUESTIONS}`;
-    //Updates the progress bar
+   
     progressBarFull.style.width = `${(questionCounter / MAX_QUESTIONS) * 100}%`;
 
-    const questionIndex = Math.floor(Math.random() * availableQuesions.length);
+    let questionIndex = Math.floor(Math.random() * availableQuesions.length);
     currentQuestion = availableQuesions[questionIndex];
     question.innerText = currentQuestion.question;
 
     choices.forEach(choice => {
-        const number = choice.dataset["number"];
+        let number = choice.dataset["number"];
         choice.innerText = currentQuestion["choice" + number];
     });
 
@@ -112,10 +111,10 @@ choices.forEach(choice => {
         if (!acceptingAnswers) return;
 
         acceptingAnswers = false;
-        const selectedChoice = e.target;
-        const selectedAnswer = selectedChoice.dataset["number"];
+        let selectedChoice = e.target;
+        let selectedAnswer = selectedChoice.dataset["number"];
 
-        const classToApply =
+        let classToApply =
             selectedAnswer == currentQuestion.answer ? "correct" : "incorrect";
 
         if (classToApply === "correct") {

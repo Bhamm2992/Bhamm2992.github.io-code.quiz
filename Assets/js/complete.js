@@ -1,11 +1,11 @@
-const username = document.getElementById("username");
-const saveScoreBtn = document.getElementById("saveScoreBtn");
-const finalScore = document.getElementById("finalScore");
-const mostRecentScore = localStorage.getItem("mostRecentScore");
+let username = document.getElementById("username");
+let saveScoreBtn = document.getElementById("saveScoreBtn");
+let finalScore = document.getElementById("finalScore");
+let mostRecentScore = localStorage.getItem("mostRecentScore");
 
-const highScores = JSON.parse(localStorage.getItem("highScores")) || [];
+let highScores = JSON.parse(localStorage.getItem("highScores")) || [];
 
-const MAX_HIGH_SCORES = 5;
+let MAX_HIGH_SCORES = 5;
 
 finalScore.innerText = mostRecentScore;
 
@@ -17,7 +17,7 @@ saveHighScore = e => {
     console.log("clicked the save button!");
     e.preventDefault();
 
-    const score = {
+    let score = {
         score: Math.floor(Math.random() * 100),
         name: username.value
     };
